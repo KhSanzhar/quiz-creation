@@ -5,11 +5,13 @@ import CreateQuiz from './components/teacher/createQuiz';
 import Dashboard from './components/student/dashboard';
 import ResultItem from './components/common/resultItem';
 import ResultsList from './components/common/resultsList';
+import NavBar from './components/common/NavBar';
 
 function App() {
   return (
     <div className="App">
       <Router>
+        <NavBar />
         <Routes>
           <Route path='/' element={ <TeacherBoard />}/>
           <Route path='/create' element={ <CreateQuiz />}/>
