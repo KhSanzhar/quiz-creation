@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
+import { Option } from '../../models';
 
-interface Option {
-    id: number;
-    value: string;
-    isCorrect: boolean;
-}
 
 interface OptionProps {
     option: Option;

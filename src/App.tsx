@@ -6,8 +6,8 @@ import Dashboard from './components/student/dashboard';
 import ResultItem from './components/common/resultItem';
 import ResultsList from './components/common/resultsList';
 import NavBar from './components/common/NavBar';
-import Assignment from './components/newTeacher/Assignment';
 import TakeTest from './components/student/takeAssignment';
+import AssignmentComponent from './components/newTeacher/Assignment';
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
           <Route path='/create' element={ <CreateQuiz />}/>
           <Route path='/student' element= { <Dashboard />}/>
           <Route path='/test/:testId' element={ <TakeTest />}/>
-          <Route path='/quiz' element={ <Assignment />} />
+          <Route path='/quiz' element={ <AssignmentComponent />} />
           <Route path='/results' element={ <ResultsList />} />
           <Route path='/results/:id' element={ <ResultItem />} />
         </Routes>

@@ -1,21 +1,10 @@
 import React, { useState } from "react";
 import QuestionForm from "./QuestionForm";
 import { Link } from "react-router-dom";
+import type { Question, Assignment } from "../../models";
 
-interface Question {
-    type: 'single' | 'multiple' | 'text';
-    description: string;
-    options: string[];
-    points: number;
-    correctOption: number[];
-}
 
-interface Assignment {
-    title: string;
-    questions: Question[]; 
-}
-
-const Assignment: React.FC = () => {
+const AssignmentComponent: React.FC = () => {
     const [title, setTitle] = useState<string>('');
     const [questions, setQuestions] = useState<Question[]>([]);
     const [editingIndex, setEditingIndex] = useState<number | null>(null);
@@ -50,7 +39,7 @@ const Assignment: React.FC = () => {
 
     const saveAssignment = () => {
         if (title.trim() && questions.length > 0) {
-            const newAssignment: Assignment = { title, questions };
+            const newAssignment: Assignment = { title, questions, createdAt: new Date().toISOString() };
             const existingAssignments = JSON.parse(localStorage.getItem('assignments') || '[]');
             existingAssignments.push(newAssignment);
             localStorage.setItem('assignments', JSON.stringify(existingAssignments));
@@ -96,4 +85,4 @@ const Assignment: React.FC = () => {
     );
 };
 
-export default Assignment;
+export default AssignmentComponent;

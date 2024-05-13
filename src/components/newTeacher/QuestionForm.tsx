@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { Question } from '../../models';
 
-interface Question {
-  type: 'single' | 'multiple' | 'text';
-  description: string;
-  options: string[];
-  points: number;
-  correctOption: number[];
-}
 
 interface Props {
   question: Question | null;
