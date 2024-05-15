@@ -1,4 +1,5 @@
 export interface Question {
+    id: number;
     type: 'single' | 'multiple' | 'text';
     description: string;
     options: string[];
@@ -7,10 +8,11 @@ export interface Question {
 }
 
 export interface Assignment {
+    id: number;
     title: string;
     questions: Question[]; 
     createdAt: string;
-    completed?: boolean;
+    completed: boolean;
 }
 
 export interface Option {

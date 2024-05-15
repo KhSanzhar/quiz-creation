@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import TeacherBoard from './components/teacher/teacherBoard';
 import CreateQuiz from './components/teacher/createQuiz';
 import Dashboard from './components/student/dashboard';
-import ResultItem from './components/common/resultItem';
-import ResultsList from './components/common/resultsList';
+import ResultItem from './components/results/resultItem';
+import ResultsList from './components/results/resultsList';
 import NavBar from './components/common/NavBar';
 import TakeTest from './components/student/takeAssignment';
 import AssignmentComponent from './components/newTeacher/Assignment';
@@ -21,7 +21,7 @@ function App() {
           <Route path='/test/:testId' element={ <TakeTest />}/>
           <Route path='/quiz' element={ <AssignmentComponent />} />
           <Route path='/results' element={ <ResultsList />} />
-          <Route path='/results/:id' element={ <ResultItem />} />
+          {/* <Route path='/results/:resultsId' element={ <ResultItem />} /> */}
         </Routes>
       </Router>
     </div>

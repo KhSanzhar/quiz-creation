@@ -21,6 +21,8 @@ const QuestionForm: React.FC<Props> = ({ question, addOrEditQuestion }) => {
       setOptions(question.options);
       setPoints(question.points);
       setCorrectOptions(question.correctOption);
+    } else {
+      resetForm();
     }
   }, [question]);
 
@@ -51,18 +53,31 @@ const QuestionForm: React.FC<Props> = ({ question, addOrEditQuestion }) => {
     setCorrectOptions(newCorrectOptions);
   };
 
+
   const toggleCorrectOption = (index: number) => {
-    const currentIndex = correctOptions.indexOf(index);
-    if (currentIndex === -1) {
-      if (type === 'single') {
-        setCorrectOptions([index]);
-      } else {
+    if (type === 'single') {
+      setCorrectOptions([index]);
+    } else {
+      const currentIndex = correctOptions.indexOf(index);
+      if (currentIndex === -1) {
         setCorrectOptions([...correctOptions, index]);
+      } else {
+        setCorrectOptions(correctOptions.filter(opt => opt !== index));
       }
-    } else if (type !== 'single') {
-      setCorrectOptions(correctOptions.filter((optionIndex) => optionIndex !== index));
     }
   };
+  // const toggleCorrectOption = (index: number) => {
+  //   const currentIndex = correctOptions.indexOf(index);
+  //   if (currentIndex === -1) {
+  //     if (type === 'single') {
+  //       setCorrectOptions([index]);
+  //     } else {
+  //       setCorrectOptions([...correctOptions, index]);
+  //     }
+  //   } else if (type !== 'single') {
+  //     setCorrectOptions(correctOptions.filter((optionIndex) => optionIndex !== index));
+  //   }
+  // };
 
   const handlePointsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPoints(Number(event.target.value));
@@ -70,14 +85,26 @@ const QuestionForm: React.FC<Props> = ({ question, addOrEditQuestion }) => {
 
   const handleSubmit = () => {
     if (description && (options.length > 0 || type === 'text') && points > 0) {
-      addOrEditQuestion({ type, description, options, points, correctOption: correctOptions });
-      setDescription('');
-      setOptions(['']);
-      setPoints(0);
-      setCorrectOptions([]);
+      const newQuestion: Question = {
+        id: question ? question.id : Date.now(),
+        type,
+        description,
+        options,
+        points,
+        correctOption: correctOptions
+      };
+      addOrEditQuestion(newQuestion);
+      resetForm();
     } else {
-      alert('Please fill in all fields and select a correct answer.');
+      alert('Please fill in all fields and select at least one correct answer.');
     }
+  };
+
+  const resetForm = () => {
+    setDescription('');
+    setOptions(['']);
+    setPoints(0);
+    setCorrectOptions([]);
   };
 
   return (
